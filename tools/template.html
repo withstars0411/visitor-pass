@@ -1,0 +1,288 @@
+<title>영화문화예술제 일일방문증</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Gowun+Dodum&family=Jua&display=swap">
+<style>
+/* Layout: two screens in one centered column. Screen 1 is a compact input form that fits a phone screen without scrolling; screen 2 shows only the pass, with a button to go back. The pass artwork is the focal point and the page around it stays in the pass's own blue. */
+*, *::before, *::after { box-sizing: border-box; }
+:root {
+  color-scheme: light;
+  --bg: #e9eefa;
+  --surface: #fbfcff;
+  --field: #f2f5fc;
+  --ink: #26324d;
+  --muted: #55627f;
+  --line: #c4cfe8;
+  --accent: #2f55b5;
+  --accent-ink: #2f55b5;
+  --on-accent: #ffffff;
+  --danger: #a12c3a;
+  --focus: #2f55b5;
+  --shadow: rgba(38, 58, 120, 0.34);
+  --display: "Jua", "Gowun Dodum", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --body: "Gowun Dodum", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121829; --surface: #1b2440; --field: #141b31; --ink: #e7ecf9; --muted: #a3afcb;
+    --line: #313e63; --accent: #3f66d6; --accent-ink: #9db6f5; --danger: #ff9aa6; --focus: #9db6f5;
+    --shadow: rgba(0, 0, 0, 0.55); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121829; --surface: #1b2440; --field: #141b31; --ink: #e7ecf9; --muted: #a3afcb;
+  --line: #313e63; --accent: #3f66d6; --accent-ink: #9db6f5; --danger: #ff9aa6; --focus: #9db6f5;
+  --shadow: rgba(0, 0, 0, 0.55); color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  -webkit-text-size-adjust: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.5;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  padding-inline: 16px;
+  padding-block: 20px 28px;
+}
+@media (min-width: 600px) { body { padding-block: 40px 48px; } }
+[hidden] { display: none !important; }
+.view { margin-inline: auto; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.view-form { max-width: 440px; }
+.view-pass { max-width: 560px; gap: 12px; }
+.enter { animation: rise 0.35s ease both; }
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .enter { animation: none; } }
+[tabindex="-1"]:focus { outline: none; }
+
+.head { display: flex; flex-direction: column; gap: 2px; }
+.eyebrow { margin: 0; font-size: 0.8rem; letter-spacing: 0.08em; color: var(--muted); }
+h1 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 9vw, 2.6rem); line-height: 1.15; color: var(--accent-ink); text-wrap: balance; }
+.lede { margin: 2px 0 0; font-size: 0.95rem; color: var(--ink); }
+
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+label { font-size: 0.85rem; letter-spacing: 0.04em; color: var(--muted); }
+select, input[type="text"] {
+  width: 100%; height: 44px; padding: 0 12px; font: inherit; font-size: 1rem; color: var(--ink);
+  background: var(--field); border: 1.5px solid var(--line); border-radius: 10px;
+}
+input[type="text"] { font-size: 1.05rem; }
+select:focus-visible, input:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.hint { margin: 0; min-height: 1.3em; font-size: 0.85rem; color: var(--muted); }
+.hint.err { font-size: 0.9rem; color: var(--danger); }
+.notice { margin: -2px 0 0; font-size: 0.8rem; text-align: center; color: var(--muted); }
+.btn {
+  height: 48px; border: 0; border-radius: 12px; cursor: pointer; width: 100%;
+  background: var(--accent); color: var(--on-accent);
+  font-family: var(--display); font-size: 1.2rem; letter-spacing: 0.04em;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { cursor: progress; filter: saturate(0.6) brightness(1.05); }
+.btn.ghost { height: 44px; background: transparent; color: var(--accent-ink); border: 1.5px solid var(--accent-ink); font-size: 1.05rem; }
+
+.pass { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; }
+.pass img {
+  display: block; width: 100%; height: auto; aspect-ratio: 1600 / 2262;
+  border-radius: 6px; background: #f3ede6; box-shadow: 0 14px 34px -14px var(--shadow);
+}
+.pass figcaption { margin: 0; max-width: 34em; text-align: center; font-size: 0.85rem; color: var(--muted); text-wrap: balance; }
+</style>
+
+<main>
+  <section id="viewForm" class="view view-form">
+    <header class="head">
+      <p class="eyebrow">2026 HAPPY YES! 영화문화예술제</p>
+      <h1 id="title" tabindex="-1">일일방문증</h1>
+      <p class="lede">자녀의 학년, 반, 이름을 입력해 주세요.</p>
+    </header>
+
+    <form id="f" class="panel" novalidate autocomplete="off">
+      <div class="pair">
+        <div class="field">
+          <label for="grade">학년</label>
+          <select id="grade"><option value="">선택</option></select>
+        </div>
+        <div class="field">
+          <label for="cls">반</label>
+          <select id="cls" disabled><option value="">선택</option></select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="name">이름</label>
+        <input id="name" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" maxlength="40">
+      </div>
+      <p id="msg" class="hint" aria-live="polite">띄어쓰기와 영문 대소문자는 구분하지 않아요.</p>
+      <button type="submit" id="go" class="btn">방문증 보기</button>
+      <p id="notice" class="notice" hidden>방문 확인을 위해 방문증을 발급하면 학년, 반, 이름, 발급 시각이 학교에 기록됩니다.</p>
+    </form>
+  </section>
+
+  <section id="viewPass" class="view view-pass" hidden>
+    <figure id="passFig" class="pass" tabindex="-1">
+      <img id="passImg" width="1600" height="2262" alt="">
+      <figcaption id="cap" aria-live="polite"></figcaption>
+    </figure>
+    <button type="button" id="back" class="btn ghost">다시 입력하기</button>
+  </section>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  var DATA = /*__DATA__*/null;
+  var W = 1600, H = 2262, S = W / 1415;
+  var BG_SRC = /*__BG__*/'';
+  var LOG_URL = /*__LOG__*/'';
+  var INK = '#1d1d24';
+  var HINT = '띄어쓰기와 영문 대소문자는 구분하지 않아요.';
+  var $ = function (id) { return document.getElementById(id); };
+  var gradeEl = $('grade'), clsEl = $('cls'), nameEl = $('name'), form = $('f'), goBtn = $('go');
+  var msgEl = $('msg'), img = $('passImg'), cap = $('cap'), fig = $('passFig');
+  var viewForm = $('viewForm'), viewPass = $('viewPass');
+  var enc = new TextEncoder();
+  if (LOG_URL) $('notice').hidden = false;
+
+  /* 학년·반 선택지는 명단에서 가져온 학급 수로 만든다. */
+  Object.keys(DATA.classes).sort().forEach(function (g) { gradeEl.add(new Option(g + '학년', g)); });
+  function fillClasses() {
+    var keep = clsEl.value, n = DATA.classes[gradeEl.value] || 0;
+    clsEl.length = 1;
+    for (var i = 1; i <= n; i++) clsEl.add(new Option(i + '반', String(i)));
+    if (keep && Number(keep) <= n) clsEl.value = keep;
+    clsEl.disabled = !n;
+  }
+  fillClasses();
+
+  /* 명단에는 이름이 들어 있지 않고, 학년|반|이름의 해시만 들어 있다. */
+  function norm(s) { return String(s || '').normalize('NFC').replace(/\s+/g, '').toUpperCase(); }
+  function hex(u8) { return Array.prototype.map.call(u8, function (b) { return b.toString(16).padStart(2, '0'); }).join(''); }
+  async function sha256(str) { return new Uint8Array(await crypto.subtle.digest('SHA-256', enc.encode(str))); }
+
+  async function find(g, c, raw) {
+    var n = norm(raw);
+    if (!n) return null;
+    var look = g + '|' + c + '|' + n;
+    var h = hex(await sha256('h|' + look)).slice(0, 32);
+    if (!Object.prototype.hasOwnProperty.call(DATA.idx, h)) return null;
+    var p = DATA.idx[h];
+    if (!p) return { name: n, ko: '' };
+    try {
+      var bytes = Uint8Array.from(atob(p), function (ch) { return ch.charCodeAt(0); });
+      var key = await crypto.subtle.importKey('raw', await sha256('k|' + look), 'AES-GCM', false, ['decrypt']);
+      var pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: bytes.slice(0, 12) }, key, bytes.slice(12));
+      var o = JSON.parse(new TextDecoder().decode(pt));
+      return { name: o.en, ko: o.ko || '' };
+    } catch (e) { return null; }
+  }
+
+  /* 방문증 그리기 */
+  var bg = new Image();
+  var bgReady = new Promise(function (res, rej) { bg.onload = res; bg.onerror = rej; });
+  bg.src = BG_SRC;
+
+  function FONT(px) { return '700 ' + px + 'px Gaegu, "Gamja Flower", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans CJK KR", sans-serif'; }
+  function fit(ctx, text, maxW, maxSize) {
+    var s = maxSize;
+    ctx.font = FONT(s);
+    while (s > 20 && ctx.measureText(text).width > maxW) { s -= 2; ctx.font = FONT(s); }
+    return s;
+  }
+  async function loadFonts(text) {
+    try { await document.fonts.load('700 60px Gaegu', text); } catch (e) { /* 글꼴을 못 받으면 기본 글꼴로 그린다 */ }
+  }
+  function toBlob(cv) {
+    return new Promise(function (res) {
+      if (cv.toBlob) cv.toBlob(function (b) { res(b ? { url: URL.createObjectURL(b), blob: true } : { url: cv.toDataURL('image/jpeg', 0.92) }); }, 'image/jpeg', 0.92);
+      else res({ url: cv.toDataURL('image/jpeg', 0.92) });
+    });
+  }
+
+  async function draw(g, c, rec) {
+    await bgReady;
+    await loadFonts(g + c + rec.name + rec.ko + '0123456789');
+    var cv = document.createElement('canvas');
+    cv.width = W; cv.height = H;
+    var ctx = cv.getContext('2d');
+    ctx.drawImage(bg, 0, 0, W, H);
+    ctx.fillStyle = INK;
+
+    ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+    ctx.font = FONT(92 * S);
+    ctx.fillText(g, 535 * S, 846 * S);
+    ctx.fillText(c, 880 * S, 846 * S);
+
+    ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    var x = 525 * S, maxW = 545 * S;
+    if (rec.ko) {
+      fit(ctx, rec.name, maxW, 56 * S); ctx.fillText(rec.name, x, 926 * S);
+      fit(ctx, rec.ko, maxW, 62 * S); ctx.fillText(rec.ko, x, 988 * S);
+    } else {
+      fit(ctx, rec.name, maxW, 100 * S); ctx.fillText(rec.name, x, 962 * S);
+    }
+    return toBlob(cv);
+  }
+
+  /* 발급 기록: 학년·반·이름을 기록용 시트로 보낸다. 응답은 확인하지 않고, 실패해도 방문증은 그대로 나온다. */
+  function logIssue(g, c, name) {
+    if (!LOG_URL) return;
+    try {
+      fetch(LOG_URL, { method: 'POST', mode: 'no-cors', keepalive: true, body: JSON.stringify({ grade: g, cls: c, name: name }) })
+        .catch(function () {});
+    } catch (e) { /* 기록에 실패해도 무시한다 */ }
+  }
+
+  /* 화면 전환: 입력 화면 ↔ 방문증 화면 */
+  function showView(which) {
+    var toPass = which === 'pass';
+    viewForm.hidden = toPass;
+    viewPass.hidden = !toPass;
+    var el = toPass ? viewPass : viewForm;
+    el.classList.remove('enter');
+    void el.offsetWidth;
+    el.classList.add('enter');
+    window.scrollTo(0, 0);
+    (toPass ? fig : $('title')).focus({ preventScroll: true });
+  }
+
+  /* 안내 문구 줄: 평소에는 입력 안내, 오류가 있으면 오류 문구로 바뀐다. */
+  function setMsg(t) { msgEl.textContent = t || HINT; msgEl.classList.toggle('err', !!t); }
+  var busy = false, curUrl = null;
+  async function submit() {
+    if (busy) return;
+    var g = gradeEl.value, c = clsEl.value, raw = nameEl.value;
+    if (!g || !c || !norm(raw)) { setMsg('학년, 반, 이름을 모두 입력해 주세요.'); return; }
+    if (!(window.crypto && crypto.subtle)) { setMsg('이 브라우저에서는 방문증을 만들 수 없습니다. 다른 브라우저로 열어 주세요.'); return; }
+    busy = true; goBtn.disabled = true; goBtn.textContent = '만드는 중…'; setMsg('');
+    try {
+      var rec = await find(g, c, raw);
+      if (!rec) { setMsg('명단에서 찾을 수 없습니다. 학년, 반, 이름을 다시 확인해 주세요.'); return; }
+      var out = await draw(g, c, rec);
+      if (curUrl) URL.revokeObjectURL(curUrl);
+      curUrl = out.blob ? out.url : null;
+      img.src = out.url;
+      img.alt = g + '학년 ' + c + '반 ' + rec.name + (rec.ko ? ' (' + rec.ko + ')' : '') + ' 일일방문증';
+      try { await img.decode(); } catch (e) { /* 디코드 실패해도 그대로 보여 준다 */ }
+      cap.textContent = g + '학년 ' + c + '반 방문증입니다. 이미지를 길게 누르거나 오른쪽 클릭하면 저장할 수 있어요.';
+      nameEl.blur();
+      logIssue(g, c, rec.name);
+      showView('pass');
+    } catch (e) {
+      setMsg('방문증을 만들지 못했습니다. 페이지를 새로고침한 뒤 다시 시도해 주세요.');
+    } finally {
+      busy = false; goBtn.disabled = false; goBtn.textContent = '방문증 보기';
+    }
+  }
+
+  gradeEl.addEventListener('change', function () { fillClasses(); setMsg(''); });
+  clsEl.addEventListener('change', function () { setMsg(''); });
+  nameEl.addEventListener('input', function () { setMsg(''); });
+  form.addEventListener('submit', function (e) { e.preventDefault(); submit(); });
+  $('back').addEventListener('click', function () { setMsg(''); showView('form'); });
+})();
+</script>

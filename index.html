@@ -367,7 +367,7 @@ select:focus-visible, input:focus-visible, button:focus-visible { outline: 3px s
     a.href = url; a.download = saveName; a.rel = 'noopener';
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(function () { URL.revokeObjectURL(url); }, 10000);
-    setSaveMsg(IN_APP ? '저장되지 않으면 이미지를 길게 눌러 저장하거나, 기본 브라우저로 열어 주세요.'
+    setSaveMsg(IN_APP ? '저장되지 않으면 이미지를 길게 눌러 저장하거나, 화면을 캡처해주세요.'
                       : '내려받기를 시작했어요. 갤러리나 “다운로드” 폴더를 확인해 주세요.');
   }
 

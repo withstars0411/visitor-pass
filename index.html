@@ -99,6 +99,13 @@ select:focus-visible, input:focus-visible, button:focus-visible { outline: 3px s
   border-radius: 6px; background: #f3ede6; box-shadow: 0 14px 34px -14px var(--shadow);
 }
 .pass figcaption { margin: 0; max-width: 34em; text-align: center; font-size: 0.85rem; color: var(--muted); text-wrap: balance; }
+/* 학교 로고 (입력 화면 맨 아래 가운데) */
+.view-form { min-height: calc(100vh - 48px); min-height: calc(100dvh - 48px); }
+@media (min-width: 600px) { .view-form { min-height: calc(100dvh - 88px); } }
+.school { margin: auto 0 0; padding-top: 8px; display: flex; justify-content: center; }
+.school img { display: block; height: 40px; width: auto; max-width: 70%; object-fit: contain; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .school img { background: #fff; padding: 6px 10px; border-radius: 10px; } }
+:root[data-theme="dark"] .school img { background: #fff; padding: 6px 10px; border-radius: 10px; }  
 </style>
 </head>
 <body>
@@ -131,6 +138,11 @@ select:focus-visible, input:focus-visible, button:focus-visible { outline: 3px s
       <button type="submit" id="go" class="btn">방문증 보기</button>
       <p id="notice" class="notice" hidden>방문 확인을 위해 방문증을 발급하면 학년, 반, 이름, 발급 시각이 학교에 기록됩니다.</p>
     </form>
+      <footer class="school">
+      <img src="https://younghwa.sen.es.kr/dggb/module/file/selectImageView.do?atchFileId=1710713&fileSn=0"
+           alt="서울영화초등학교" height="40" referrerpolicy="no-referrer"
+           onerror="this.parentNode.hidden=true">
+    </footer>  
   </section>
 
   <section id="viewPass" class="view view-pass" hidden>

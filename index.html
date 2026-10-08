@@ -65,8 +65,11 @@ body {
 @media (prefers-reduced-motion: reduce) { .enter { animation: none; } }
 [tabindex="-1"]:focus { outline: none; }
 
-.head { display: flex; flex-direction: column; gap: 2px; }
-.eyebrow { margin: 0; font-size: 0.8rem; letter-spacing: 0.08em; color: var(--muted); }
+.head { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 8px; row-gap: 2px; align-items: start; }
+.head > * { grid-column: 1; }
+.head .lede { grid-column: 1 / -1; }
+.head .logo { grid-column: 2; grid-row: 1 / span 2; justify-self: end; width: clamp(84px, 27vw, 112px); height: auto; aspect-ratio: 480 / 253; margin-top: -4px; }
+.eyebrow { margin: 0; font-size: 0.8rem; letter-spacing: 0.04em; color: var(--muted); }
 h1 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 9vw, 2.6rem); line-height: 1.15; color: var(--accent-ink); text-wrap: balance; }
 .lede { margin: 2px 0 0; font-size: 0.95rem; color: var(--ink); }
 
@@ -117,6 +120,7 @@ select:focus-visible, input:focus-visible, button:focus-visible { outline: 3px s
       <p class="eyebrow">2026 HAPPY YES! 영화문화예술제</p>
       <h1 id="title" tabindex="-1">일일방문증</h1>
       <p class="lede">자녀의 학년, 반, 이름을 입력해 주세요.</p>
+      <img class="logo" src="logo.png" width="480" height="253" alt="모두가 행복한 학교 Happy Yes!" onerror="this.hidden=true">
     </header>
 
     <form id="f" class="panel" novalidate autocomplete="off">
